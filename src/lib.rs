@@ -8,6 +8,7 @@ mod map_reduce_tests {
     use core::iter::repeat;
     #[test]
     fn str_to_int() {
+        // This test takes a list of strings and converts them to integers and sums them.
         let words: Vec<String> = (0..1024).map(|i| format!("{}", i)).collect();
         let res = words
             .into_iter()
@@ -19,6 +20,8 @@ mod map_reduce_tests {
 
     #[test]
     fn numbers_sum() {
+        // This test takes a list of numbers and sums them, here we can convert the numbers to
+        // something else if we want.
         let nums = (0..(1 << 15)).collect::<Vec<_>>();
         let res = nums.iter().map_reduce(|n| *n, |a, b| a + b).unwrap();
         assert_eq!(res, (0..(1 << 15)).sum());
@@ -26,6 +29,7 @@ mod map_reduce_tests {
 
     #[test]
     fn tuple_max() {
+        // This test takes a list of tuples and returns the maximum of the second element.
         let data = vec![
             ("kake", 1),
             ("kake", 2),
@@ -55,6 +59,7 @@ mod map_reduce_tests {
 
     #[test]
     fn tuple_min() {
+        // This test takes a list of tuples and returns the minimum of the second element.
         let data = vec![
             ("kake", 1),
             ("kake", 2),
@@ -84,6 +89,7 @@ mod map_reduce_tests {
 
     #[test]
     fn average() {
+        // This test takes a list of 1s, doubles it calculates the average.
         let data = repeat(1).take(1 << 16).collect::<Vec<_>>();
         let res = data.iter().map_reduce(|n| *n * 2, |a, b| a + b).unwrap() / data.len();
         assert_eq!(res, 2);
